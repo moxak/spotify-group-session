@@ -4,7 +4,7 @@ It is an utility application for Spotify function "Group Session" while using de
 
 Also it is Implemented some functions to vizualize Audio Features. ([Read more](https://developer.spotify.com/documentation/web-api/reference/#/operations/get-several-audio-features))
 
-[Deploied to Heroku](https://spotify-group-session-for-dt.herokuapp.com/)
+[Deployed to Heroku](https://spotify-group-session-for-dt.herokuapp.com/)
 
 ## Local Installation & Set Up
 
