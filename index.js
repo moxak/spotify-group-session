@@ -4,6 +4,7 @@ const axios = require('axios');
 const {randomBytes} = require('crypto');
 const querystring = require('querystring');
 const app = express();
+const path = require('path');
 
 function generateRandomString(length) {
     return randomBytes(length).reduce((p, i) => p + (i % 36).toString(36), '')
@@ -19,6 +20,8 @@ const REDIRECT_URI = process.env.REDIRECT_URI;
 const FRONTEND_URI = process.env.FRONTEND_URI;
 const PORT = process.env.PORT || 8888;
 
+// Priority server any static files
+app.use(express.static(path.resolve(__dirname, './client/build')));
 
 const statekey = "spotify_auth_state";
 
@@ -118,6 +121,11 @@ app.get("/refresh_token", (req, res)=> {
     }).catch(error => {
         res.send(error);
     });
+});
+
+// All remaining requests return the React app, so it can handle routing.
+app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, './client/build', 'index.html'));
 });
 
 app.listen(PORT, () => {
