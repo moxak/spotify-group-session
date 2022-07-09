@@ -4,7 +4,6 @@ const axios = require('axios');
 const {randomBytes} = require('crypto');
 const querystring = require('querystring');
 const app = express();
-const port = 8888;
 
 function generateRandomString(length) {
     return randomBytes(length).reduce((p, i) => p + (i % 36).toString(36), '')
@@ -17,6 +16,9 @@ function escapeRegExp(re, string) {
 const CLIENT_ID = process.env.CLIENT_ID;
 const CLIENT_SECRET = process.env.CLIENT_SECRET;
 const REDIRECT_URI = process.env.REDIRECT_URI;
+const FRONTEND_URI = process.env.FRONTEND_URI;
+const PORT = process.env.PORT || 8888;
+
 
 const statekey = "spotify_auth_state";
 
@@ -84,7 +86,7 @@ app.get('/callback', (req, res)=> {
 
             // redriect to rect app
             // pass along tokens & refresh token in query params
-            res.redirect(`http://localhost:3000/?${queryParams}`);        
+            res.redirect(`${FRONTEND_URI}/?${queryParams}`);        
 
         } else {
             res.redirect(`/?${querystring.stringify({ error: 'invalid_token' })}`);
@@ -118,6 +120,6 @@ app.get("/refresh_token", (req, res)=> {
     });
 });
 
-app.listen(port, () => {
-    console.log(`App listening on port ${port}`);
+app.listen(PORT, () => {
+    console.log(`App listening on port ${PORT}`);
 });
