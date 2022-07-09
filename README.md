@@ -1,6 +1,6 @@
 # Spotify Group Session
 
-> **Warning**
+> **Warning**<br>
 > A feature for Group Session is not available yet.
 
 
