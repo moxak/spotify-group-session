@@ -62,7 +62,7 @@ Also it is Implemented some functions to vizualize Audio Features. ([Read more](
 ### Initialization
 
 ```shell
-npm init
+npm install
 ```
 
 ### Launch applications
