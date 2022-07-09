@@ -26,12 +26,12 @@ npm client
 
 ### Install packages
 
-install into an authenication server
+install a package for an authenication server
 ```bash
 npm i <PACKAGE_NAME>
 ```
 
-install into React
+install a package for React client
 ```bash
 cd client
 npm i <PACKAGE_NAME>
