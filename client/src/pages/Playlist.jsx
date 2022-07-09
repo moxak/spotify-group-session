@@ -4,7 +4,7 @@ import axios from 'axios';
 import { catchErrors } from '../utils';
 import { getPlaylistById, getAudioFeaturesForTracks } from '../spotify';
 import { SectionWrapper, TrackList } from '../components';
-import { StyledHeader } from '../styles';
+import { StyledHeader, StyledDropdown } from '../styles';
 
 
 const Playlist = () => {
@@ -13,6 +13,9 @@ const Playlist = () => {
     const [tracks, setTracks] = useState(null);
     const [tracksData, setTracksData] = useState(null);
     const [audioFeatures, setAudioFeatures] = useState(null);
+    const [sortValue, setSortValue] = useState('');
+    const sortOptions = ['danceability', 'energy', 'loudness', 'acousticness', 
+                        'instrumentalness', 'liveness', 'valence', 'tempo'];
 
 
     useEffect(() => {
@@ -74,7 +77,7 @@ const Playlist = () => {
             if (!track.audio_features) {
                 const audioFeatureObj = audioFeatures.find(item => {
                     if (!item || !track) {
-                        return null;
+                        return;
                     }
                     return item.id === track.id;
                 });
@@ -84,8 +87,26 @@ const Playlist = () => {
         });
     }, [tracks, audioFeatures]);
 
-    console.log(tracksWithAudioFeatures);
+    // Sort tracks by audio feature to be used in template
+    const sortedTracks = useMemo(() => {
+        if (!tracksWithAudioFeatures) {
+            return;
+        }
 
+        return [...tracksWithAudioFeatures].sort((a, b) => {
+            const aFeatures = a['audio_features'];
+            const bFeatures = b['audio_features'];
+
+            if (!aFeatures || !bFeatures) {
+                return false;
+            }
+            return bFeatures[sortValue] - aFeatures[sortValue];
+        });
+
+    }, [sortValue, tracksWithAudioFeatures]);
+
+    console.log(sortedTracks);
+    
     return (
         <>
         {playlist && (
@@ -110,12 +131,30 @@ const Playlist = () => {
                 </div>
             </StyledHeader>
         )}
+        <main>
             <SectionWrapper title="Playlist" breadcrumb="true">
-                { tracksWithAudioFeatures && (                    
-                    <TrackList tracks={tracksWithAudioFeatures} />
+                <StyledDropdown active={!!sortValue}>
+                    <label className="sr-only" htmlFor="order-select">
+                        Srot tracks
+                    </label>
+                    <select
+                        name="track-order"
+                        id="order-select"
+                        onChange={e => setSortValue(e.target.value)}
+                    >
+                        <option value="">Sort tracks</option>
+                        {sortOptions.map((option, i)=>(
+                            <option key={i} value={option}>
+                                {`${option.charAt(0).toUpperCase()}${option.slice(1)}`}
+                            </option>
+                        ))}
+                    </select>
+                </StyledDropdown>
+                { sortedTracks && (                    
+                    <TrackList tracks={sortedTracks} />
                 )}
             </SectionWrapper>
-
+        </main>
         </>
     );
 };

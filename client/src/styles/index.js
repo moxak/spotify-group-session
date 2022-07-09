@@ -1,4 +1,5 @@
 export { default as GlobalStyle } from './GlobalStyle';
+export { default as StyledDropdown } from './StyledDropdown';
 export { default as StyledHeader } from './StyledHeader';
 export { default as StyledSection } from './StyledSection';
 export { default as StyledGrid } from './StyledGrid';
