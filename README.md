@@ -1,5 +1,9 @@
 # Spotify Group Session
 
+> **Warning**
+> A feature for Group Session is not available yet.
+
+
 It is an utility application for Spotify function "Group Session" while using desktop client.
 
 Also it is Implemented some functions to vizualize Audio Features. ([Read more](https://developer.spotify.com/documentation/web-api/reference/#/operations/get-several-audio-features))
