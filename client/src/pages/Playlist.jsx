@@ -62,38 +62,29 @@ const Playlist = () => {
 
     }, [tracksData]);
 
-    const tracksForTracklist = useMemo(() => {
-        if (!tracks) {
-            return;
-        } 
-        return tracks.map(({ track }) => track);
-    }, [tracks]);
-    
-    console.log(audioFeatures);
-
     // Map over tracks and add autio_features property to each track
-    // const tracksWithAudioFeatures = useMemo(() => {
-    //     if (!tracks || !audioFeatures) {
-    //         return;
-    //     }
+    const tracksWithAudioFeatures = useMemo(() => {
+        if (!tracks || !audioFeatures) {
+            return;
+        }
 
-    //     return tracks.map(({ track }) => {
-    //         const trackToAdd = track;
+        return tracks.map(({ track }) => {
+            const trackToAdd = track;
 
-    //         if (!track.audio_features) {
-    //             const audioFeatureObj = audioFeatures.find(item => {
-    //                 if (!item || !track) {
-    //                     return null;
-    //                 }
-    //                 return item.id === track.id;
-    //             });
-    //             trackToAdd['audio_features'] = audioFeatureObj;
-    //         }
-    //         return trackToAdd;
-    //     });
-    // }, [tracks, audioFeatures]);
+            if (!track.audio_features) {
+                const audioFeatureObj = audioFeatures.find(item => {
+                    if (!item || !track) {
+                        return null;
+                    }
+                    return item.id === track.id;
+                });
+                trackToAdd['audio_features'] = audioFeatureObj;
+            }
+            return trackToAdd;
+        });
+    }, [tracks, audioFeatures]);
 
-    // console.log(tracksWithAudioFeatures);
+    console.log(tracksWithAudioFeatures);
 
     return (
         <>
@@ -120,8 +111,8 @@ const Playlist = () => {
             </StyledHeader>
         )}
             <SectionWrapper title="Playlist" breadcrumb="true">
-                { tracksForTracklist && (                    
-                    <TrackList tracks={tracksForTracklist} />
+                { tracksWithAudioFeatures && (                    
+                    <TrackList tracks={tracksWithAudioFeatures} />
                 )}
             </SectionWrapper>
 
