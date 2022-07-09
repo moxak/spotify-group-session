@@ -8,7 +8,7 @@ import {
 import { accessToken, logout } from './spotify';
 import { catchErrors } from './utils';
 import { GlobalStyle } from './styles';
-import { Login, Profile } from './pages';
+import { Login, Profile, TopArtists, TopTracks, Playlists, Playlist } from './pages';
 import styled from 'styled-components/macro';
 
 const StyledLogoutButton = styled.button`
@@ -43,27 +43,6 @@ function App() {
   useEffect(() => {
     setToken(accessToken);
   }, []);
-  function Artists() {
-    return (
-      <h1>Top Artists</h1>
-    );
-  }
-  function Tracks() {
-    return (
-      <h1>Top Tracks</h1>
-    );
-  }
-  function Playlist() {
-    return (
-      <h1>Playlist</h1>
-    );
-  }
-  function Playlists() {
-    return (
-      <h1>Playlists</h1>
-    );
-  }
-
 
   return (
     <div className="App">
@@ -77,8 +56,8 @@ function App() {
             <Router>
               <ScrollToTop />
               <Routes>
-                <Route path="/top-artists" element={<Artists />} />
-                <Route path="/top-tracks" element={<Tracks />} />
+                <Route path="/top-artists" element={<TopArtists />} />
+                <Route path="/top-tracks" element={<TopTracks />} />
                 <Route path="/playlists/:id" element={<Playlist />} />
                 <Route path="/playlists" element={<Playlists />}  />
                 <Route path="/" element={<Profile />} />
