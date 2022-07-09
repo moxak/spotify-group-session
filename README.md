@@ -114,7 +114,7 @@ cd client
 npm i <PACKAGE_NAME>
 ```
 
-## Documents
+## Links
 
 ### Spotify API
 
