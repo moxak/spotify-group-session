@@ -24,23 +24,25 @@ app.get("/login", (req, res) => {
     const state = generateRandomString(16);
     res.cookie(statekey, state);
 
-    let scope = 'user-read-playback-state \
-        user-modify-playback-state \
-        user-read-private \
-        user-follow-modify \
-        user-follow-read \
-        user-library-modify \
-        user-library-read \
-        streaming \
-        user-read-playback-position \
-        playlist-modify-private \
-        app-remote-control \
-        user-read-email \
-        playlist-read-private \
-        user-top-read \
-        playlist-modify-public \
-        user-read-currently-playing \
-        user-read-recently-played';
+    let scope = [
+        'user-read-playback-state',
+        'user-modify-playback-state',
+        'user-read-private',
+        'user-follow-modify',
+        'user-follow-read',
+        'user-library-modify',
+        'user-library-read',
+        'streaming',
+        'user-read-playback-position',
+        'playlist-modify-private',
+        'app-remote-control',
+        'user-read-email',
+        'playlist-read-private',
+        'user-top-read',
+        'playlist-modify-public',
+        'user-read-currently-playing',
+        'user-read-recently-played'
+    ].join(' ');
 
     const queryParams = querystring.stringify({
         client_id: CLIENT_ID,

@@ -5,7 +5,7 @@ import {
   Routes,
   useLocation
 } from 'react-router-dom';
-import { accessToken, logout,  getCurrentUserProfile } from './spotify';
+import { accessToken, logout } from './spotify';
 import { catchErrors } from './utils';
 import { GlobalStyle } from './styles';
 import { Login, Profile } from './pages';
@@ -40,17 +40,8 @@ function ScrollToTop() {
 
 function App() {
   const [token, setToken] = useState(null)
-  const [profile, setProfile]= useState(null);
   useEffect(() => {
     setToken(accessToken);
-
-    const fetchData = async () => {
-      const { data } = await getCurrentUserProfile();
-      setProfile(data);
-    }
-
-    catchErrors(fetchData());
-
   }, []);
   function Artists() {
     return (
