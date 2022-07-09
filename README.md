@@ -81,7 +81,7 @@ launch client
 npm client
 ```
 
-### Deploy
+### Deploy(*duplicated)
 
 Deploy with Heroku and using [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli).
 
