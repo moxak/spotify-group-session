@@ -219,6 +219,6 @@ export const pausePlayback = () => {
  * @param {string} context_uri - The context URI to play. If omitted, the user will start playing the currently-playing context.
  * @returns {Promise}
  */
-export const startPlayback = (context_uri=null) => {
-    return axios.put(`/me/player/play?context_uri=${context_uri}`);
+export const startPlayback = (uris=null) => {
+    return axios.put(`/me/player/play`, {uris});
 }

@@ -4,14 +4,18 @@ import { StyledNowPlayingBar } from '../styles';
 import { getPlaybackState, pausePlayback, startPlayback } from '../spotify';
 import { AudioSpectrum } from '../components';
 import { BsFillPlayCircleFill, BsFillPauseCircleFill } from 'react-icons/bs';
+import { IoReloadOutline } from 'react-icons/io5';
 
 const NowPlayingBar = () => {
     const [playbackState, setPlaybackState] = useState(null);
     const [track, setTrack] = useState(null);
     const [isPlaying, setIsPlaying] = useState(false);
+    const [hasLoad, setHasLoad ] = useState(false);
 
     useEffect(() => {
         const fetchData = async() => {
+            setHasLoad(false)
+            
             const { status ,data } = await getPlaybackState();
             if (status === 200) {
                 setPlaybackState(data);
@@ -21,11 +25,14 @@ const NowPlayingBar = () => {
                 setPlaybackState(null);
                 setTrack(null);
             }
+            
         }
 
         catchErrors(fetchData());
 
-    }, []);
+    }, [hasLoad]);
+
+    console.log(track);
 
     return (
         <StyledNowPlayingBar>
@@ -53,6 +60,7 @@ const NowPlayingBar = () => {
             
             <div className="playling__bar">
                 <button 
+                    alt="Play/Pause button"
                     onClick={()=> {
                         if (isPlaying) {
                             setIsPlaying(false);
@@ -64,6 +72,10 @@ const NowPlayingBar = () => {
                     }}
                 >
                 {isPlaying ? (<BsFillPauseCircleFill size={42}/>) : (<BsFillPlayCircleFill size={42}/>)}
+                </button>
+                <button alt="Reload playback"
+                    onClick={()=> setHasLoad(true) }>
+                    <IoReloadOutline size={42} />
                 </button>
             </div>
             <div className="playling__volume">

@@ -1,5 +1,7 @@
 import { formatDuration } from '../utils';
 import { StyledTrackList } from '../styles';
+import { pausePlayback, startPlayback } from '../spotify';
+import { FaPlay } from 'react-icons/fa';
 
 const TrackList = ({ tracks}) => (
     <>
@@ -7,7 +9,12 @@ const TrackList = ({ tracks}) => (
             <StyledTrackList>
                 {tracks.map((track, i) => (
                     <li className="track__item" key={i}>
-                        <div className="track__item__num">{i+1}</div>
+                        <div className="track__item__num-1">{i+1}</div>
+                        <div className="track__item__num-2">
+                            <button onClick={() => {
+                                startPlayback([track.uri]);
+                            }}><FaPlay /></button>
+                        </div>
                         <div className="track__item__title-group">
                             {track.album.images.length && track.album.images[2] && (
                                 <div className="track__item__img">

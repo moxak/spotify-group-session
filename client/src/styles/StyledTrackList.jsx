@@ -5,6 +5,21 @@ const StyledTrackList = styled.ul`
   margin: 0;
   padding: 0;
 
+  button {
+        padding:0;
+        background-color: transparent;
+
+        :hover{
+            background-color: transparent;
+        }
+        &:focus,
+        &:active,
+        &::after {
+            background-color: transparent;
+        }
+
+    }
+
   .track__item {
     display: grid;
     align-items: center;
@@ -35,6 +50,23 @@ const StyledTrackList = styled.ul`
     font-size: var(--fz-md);
     font-variant-numeric: tabular-nums;
     overflow: visible;
+    
+    &-1 {
+      display: block;
+    }
+
+    &-2 {
+      display: none;
+      padding-left: none;
+      margin-left: none;
+    }
+  }
+
+  .track__item:hover .track__item__num-1  {
+    display: none;
+  }
+  .track__item:hover .track__item__num-2  {
+    display: block;
   }
 
   .track__item__title-group {

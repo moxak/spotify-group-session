@@ -26,7 +26,18 @@ const StyledNowPlayingBar = styled.div`
 
     button {
         background-color: transparent;
+
+        :hover{
+            background-color: transparent;
+        }
+        &:focus,
+        &:active,
+        &::after {
+            background-color: transparent;
+        }
+
     }
+
 
     .track__contrainer {
         display: inherit;
