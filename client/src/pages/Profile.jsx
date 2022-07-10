@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { catchErrors } from '../utils';
 import { getCurrentUserProfile, getCurrentUserPlaylists, getTopArtists, getTopTracks } from '../spotify';
-import { Loader, SectionWrapper, ArtistsGrid, TrackList, PlaylistsGrid } from '../components';
+import { Loader, SectionWrapper, ArtistsGrid, TrackList, PlaylistsGrid, InvalidUser } from '../components';
 import { StyledHeader } from '../styles';
 
 const Profile = () => {
@@ -67,7 +67,8 @@ const Profile = () => {
           </SectionWrapper>
         </main>
       ) : (
-        <Loader />
+        // <Loader />
+        <InvalidUser />
       )}
     </>
   )

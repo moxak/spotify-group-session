@@ -55,7 +55,9 @@ const NowPlayingBar = () => {
                     </div>
                 </div>
             ) : (
+                <div className="track__item__title-group">
                 <div>Spotify is not active</div>
+                </div>
             )}
             
             <div className="playling__bar">
@@ -63,11 +65,9 @@ const NowPlayingBar = () => {
                     alt="Play/Pause button"
                     onClick={()=> {
                         if (isPlaying) {
-                            setIsPlaying(false);
-                            pausePlayback();
+                            pausePlayback().then(()=>{setIsPlaying(false);});
                         } else {
-                            setIsPlaying(true);
-                            startPlayback();
+                            startPlayback().then(() => {setIsPlaying(true);});
                         }
                     }}
                 >

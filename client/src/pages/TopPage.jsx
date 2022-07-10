@@ -17,7 +17,7 @@ const TopPage = () => (
             Group Session
         </h1>
         <LoginButton />
-        <Loader />
+        {/* <Loader /> */}
     </StyledTopPage>
 );
 

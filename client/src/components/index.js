@@ -7,3 +7,4 @@ export { default as TimeRangeButtons } from './TimeRangeButtons';
 export { default as Loader } from './Loader';
 export { default as NowPlayingBar } from './NowPlayingBar';
 export { default as AudioSpectrum } from './AudioSpectrum';
+export { default as InvalidUser } from './InvalidUser';
