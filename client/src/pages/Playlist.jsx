@@ -105,7 +105,6 @@ const Playlist = () => {
 
     }, [sortValue, tracksWithAudioFeatures]);
 
-    console.log(sortedTracks);
     
     return (
         <>

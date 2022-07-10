@@ -15,6 +15,7 @@
     "server": "nodemon index.js",
     "client": "cd client && npm start",
     "postinstall": "cd client && npm install",
+    "deploy": "git commit -m ''  --allow-empty-message --allow-empty && git push heroku master",
     "build": "NODE_ENV=production cd client/ && npm install && npm run build",
     "start-server": "node index.js"
   },

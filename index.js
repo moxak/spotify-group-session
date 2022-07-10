@@ -30,9 +30,10 @@ app.get("/login", (req, res) => {
     res.cookie(statekey, state);
 
     let scope = [
+        'user-read-private',
+        'user-read-email',
         'user-read-playback-state',
         'user-modify-playback-state',
-        'user-read-private',
         'user-follow-modify',
         'user-follow-read',
         'user-library-modify',
@@ -41,7 +42,6 @@ app.get("/login", (req, res) => {
         'user-read-playback-position',
         'playlist-modify-private',
         'app-remote-control',
-        'user-read-email',
         'playlist-read-private',
         'user-top-read',
         'playlist-modify-public',
@@ -62,7 +62,7 @@ app.get("/login", (req, res) => {
 
 app.get('/callback', (req, res)=> {
     const code = req.query.code || null;
-
+    
     axios({
         method: 'post',
         url: 'https://accounts.spotify.com/api/token',
