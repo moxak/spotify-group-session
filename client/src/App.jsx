@@ -8,7 +8,8 @@ import {
 import { accessToken, logout } from './spotify';
 import { catchErrors } from './utils';
 import { GlobalStyle } from './styles';
-import { Login, Profile, TopArtists, TopTracks, Playlists, Playlist } from './pages';
+import { TopPage, Profile, TopArtists, TopTracks, Playlists, Playlist } from './pages';
+import { NowPlayingBar } from './components';
 import styled from 'styled-components/macro';
 
 const StyledLogoutButton = styled.button`
@@ -28,6 +29,10 @@ const StyledLogoutButton = styled.button`
 `;
 
 
+/**
+ * When the pathname changes, scroll to the top of the page.
+ * @returns Nothing.
+ */
 function ScrollToTop() {
   const { pathname }  = useLocation;
 
@@ -35,7 +40,7 @@ function ScrollToTop() {
     window.scrollTo(0, 0);
   }, [pathname]);
 
-  return null;
+  return;
 }
 
 function App() {
@@ -49,7 +54,7 @@ function App() {
       <GlobalStyle />
       <header className="App-header">
         {!token ? (
-          <Login />
+          <TopPage/>
         ) :(
           <>
             <StyledLogoutButton onClick={logout}>Log Out</StyledLogoutButton>
@@ -63,6 +68,7 @@ function App() {
                 <Route path="/" element={<Profile />} />
               </Routes>
             </Router>
+            <NowPlayingBar />
           </>
         )}
       </header>

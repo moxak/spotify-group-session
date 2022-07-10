@@ -134,6 +134,7 @@ axios.defaults.headers['Content-Type'] = 'application/json';
 
 /**
  * Get Current User's Profile
+ * required scopes: user-read-private, user-read-email
  * https://developer.spotify.com/documentation/web-api/reference/#/operations/get-current-users-profile
  * @returns {Promise}
  */
@@ -142,6 +143,7 @@ export const getCurrentUserProfile = () => axios.get('/me');
 
 /**
  * Get a list of Current User's Playlists
+ * required scopes: playlist-read-private
  * https://developer.spotify.com/documentation/web-api/reference/#/operations/get-a-list-of-current-users-playlists
  * @returns {Promise}
  */
@@ -151,6 +153,7 @@ export const getCurrentUserPlaylists = (limit=20) => {
 
 /**
  * Get a User's Top Artists and Tracks
+ * required scopes: user-top-read
  * https://developer.spotify.com/documentation/web-api/reference/#/operations/get-users-top-artists-and-tracks
  * @param {string} time_range - 'short_term'(last 4 weeks), 'medium_term'(last 6 months), 'long_term'(all time) or 'long_term' (calculated from several years of data and including all new data as it becomes available). Default is 'short_term'
  * @returns {Promise}
@@ -161,6 +164,7 @@ export const getTopArtists = (time_range='short_term') => {
 
 /**
  * Get a User's Top Tracks
+ * required scopes: user-top-read
  * https://developer.spotify.com/documentation/web-api/reference/#/operations/get-users-top-artists-and-tracks
  * @param {string} time_range - 'short_term'(last 4 weeks), 'medium_term'(last 6 months), 'long_term'(all time) or 'long_term' (calculated from several years of data and including all new data as it becomes available). Default is 'short_term'
  * @returns {Promise}
@@ -171,6 +175,7 @@ export const getTopTracks = (time_range='short_term') => {
 
 /**
  * Get a Playlist
+ * required scopes: none
  * https://developer.spotify.com/documentation/web-api/reference/#/operations/get-playlist
  * @param {string} playlist_id - The Spotify ID for the playlist.
  * @returns {Promise}
@@ -180,7 +185,8 @@ export const getPlaylistById = playlist_id => {
 };
 
 /**
- * Get  Audio Features for Several Tracks
+ * Get Audio Features for Several Tracks
+ * required scopes: none
  * https://developer.spotify.com/documentation/web-api/reference/#/operations/get-several-audio-features
  * @param {string} ids - A comma-separated list of the Spotify IDs for the tracks. Maximum: 100 IDs.
  * @returns {Promise}
@@ -188,3 +194,31 @@ export const getPlaylistById = playlist_id => {
 export const getAudioFeaturesForTracks = ids => {
     return axios.get(`/audio-features?ids=${ids}`);
 };
+
+/**
+ * Get current playback state
+ * https://developer.spotify.com/documentation/web-api/reference/#/operations/get-information-about-the-users-current-playback
+ * @returns {Promise}
+ */
+export const getPlaybackState = () => {
+    return axios.get(`/me/player`);
+}
+
+/**
+ * Pause playback
+ * https://developer.spotify.com/documentation/web-api/reference/#/operations/pause-a-users-playback
+ * @returns {Promise}
+ */
+export const pausePlayback = () => {
+    return axios.put(`/me/player/pause`);
+}
+
+/**
+ * Start/Resume playback
+ * https://developer.spotify.com/documentation/web-api/reference/#/operations/start-a-users-playback
+ * @param {string} context_uri - The context URI to play. If omitted, the user will start playing the currently-playing context.
+ * @returns {Promise}
+ */
+export const startPlayback = (context_uri=null) => {
+    return axios.put(`/me/player/play?context_uri=${context_uri}`);
+}

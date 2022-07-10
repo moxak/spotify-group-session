@@ -1,13 +1,5 @@
 import styled from 'styled-components/macro';
 
-const StyledLoginContainer = styled.main`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-`;
-
 const StyledLoginButton = styled.a`
   display: inline-block;
   background-color: var(--green);
@@ -30,11 +22,9 @@ const LOGIN_URI =
     : 'https://spotify-group-session-for-dt.herokuapp.com/login';
 
 const Login = () => (
-  <StyledLoginContainer>
     <StyledLoginButton href={LOGIN_URI}>
       Log in to Spotify
     </StyledLoginButton>
-  </StyledLoginContainer>
 );
 
 export default Login;
